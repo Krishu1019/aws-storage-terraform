@@ -45,6 +45,7 @@ resource "aws_lambda_function" "presign" {
   environment {
     variables = {
       BUCKET_NAME = aws_s3_bucket.storage.bucket
+      API_KEY     = var.api_key
     }
   }
 }

@@ -31,6 +31,7 @@ Client --(presigned URL)--> S3 bucket (private, encrypted, versioned)
 - Bucket has all public access blocked; direct requests return 403
 - The Lambda role can only `GetObject` and `PutObject` on this one bucket
 - Presigned URLs expire after 5 minutes
+- API requests require an `x-api-key` header; requests without it get 401
 - Server-side encryption (AES-256) and versioning enabled
 - Old object versions expire after 30 days
 - Terraform state lives in a separate bucket, isolated from user data
@@ -78,8 +79,8 @@ curl -i https://<bucket-name>.s3.ap-south-1.amazonaws.com/hello.txt
 
 ## Known limitations and next steps
 
-- The API has no authentication yet; anyone with the URL can request links
-- Planned: API authentication, CloudWatch alarm on Lambda errors, GitHub Actions pipeline (fmt, validate, plan) with OIDC
+- The API key is kept in Terraform state and a Lambda environment variable; production should use AWS Secrets Manager or SSM Parameter Store
+- Planned: CloudWatch alarm on Lambda errors, GitHub Actions pipeline (fmt, validate, plan) with OIDC
 
 ## Clean up
 

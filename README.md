@@ -80,7 +80,7 @@ curl -i https://<bucket-name>.s3.ap-south-1.amazonaws.com/hello.txt
 ## Known limitations and next steps
 
 - The API key is kept in Terraform state and a Lambda environment variable; production should use AWS Secrets Manager or SSM Parameter Store
-- Planned: CloudWatch alarm on Lambda errors, GitHub Actions pipeline (fmt, validate, plan) with OIDC
+- CI: GitHub Actions runs fmt, validate and plan on every push (OIDC, no stored AWS keys)
 
 ## Clean up
 
